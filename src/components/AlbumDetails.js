@@ -2,21 +2,22 @@
  * Created by david on 7/16/17.
  */
 import React from 'react'
-import { Text, View, Image } from 'react-native'
+import { Text, View, Image, Linking } from 'react-native'
 import Card from './Card'
 import CardSection from './CardSection'
+import Button from './Button'
 
-// destructuring off off 'props'
-const AlbumDetails = ({ album }) => {
+// destructuring off of 'props'
+const AlbumDetails = ({album}) => {
 
-  const { title, artist, thumbnail_image, image } = album;
+  const {title, artist, thumbnail_image, image, url} = album
   const {
     thumbnailStyle,
     thumbnailContainerStyle,
     headerStyle,
     headerTextStyle,
     imageStyle
-  } = styles;
+  } = styles
 
   return (
     <Card>
@@ -24,7 +25,7 @@ const AlbumDetails = ({ album }) => {
         <View style={thumbnailContainerStyle}>
           <Image
             style={thumbnailStyle}
-            source={{ uri: thumbnail_image }}
+            source={{uri: thumbnail_image}}
           />
         </View>
         <View style={headerStyle}>
@@ -32,11 +33,16 @@ const AlbumDetails = ({ album }) => {
           <Text>{artist}</Text>
         </View>
       </CardSection>
+
       <CardSection>
-          <Image
-            style={imageStyle}
-            source={{ uri: image }}
-          />
+        <Image
+          style={imageStyle}
+          source={{uri: image}}
+        />
+      </CardSection>
+
+      <CardSection>
+        <Button onPress={ () => { Linking.openURL(url) } } text="Buy Now"/>
       </CardSection>
     </Card>
   )
